@@ -1,0 +1,154 @@
+@import url("https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&family=Lobster&display=swap");
+
+nav {
+  height: 70px;
+  background-color: #555a60;
+  color: #c2f1db;
+
+  .nav-area {
+    height: 70px;
+    max-width: 1050px;
+    margin: auto;
+    padding: 0 50px;
+    background-color: #555a60;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.3s;
+
+    .menus {
+      width: 40%;
+      display: flex;
+      justify-content: space-between;
+
+      a {
+        color: #c2f1db;
+        text-decoration: none;
+
+        h2 {
+          font-family: "Balsamiq Sans", cursive;
+          font-weight: 700;
+        }
+      }
+
+      .menu-item ul {
+        display: flex;
+        margin: 5px 0 0 30px;
+
+        li {
+          list-style: none;
+
+          a {
+            margin: auto 5px;
+            padding: 5px 10px;
+            transition: 0.3s;
+            font-size: 18px;
+
+            &.active {
+              color: #a0c9b5;
+            }
+          }
+        }
+      }
+    }
+
+    .cart {
+      position: relative;
+      margin-right: 30px;
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+
+      .cart-count {
+        position: absolute;
+        top: -12px;
+        left: 8px;
+        height: 22px;
+        width: 22px;
+        background-color: #f16565;
+        border-radius: 40%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        h4 {
+          font-size: 15px;
+        }
+      }
+    }
+
+    .hamburger {
+      display: none;
+    }
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  nav {
+    .nav-area {
+      padding: 0 20px 0 50px;
+      align-items: unset;
+
+      &.active {
+        height: 200px;
+      }
+
+      .menus {
+        margin-top: 20px;
+        justify-content: unset;
+        flex-direction: column;
+
+        .menu-item ul {
+          flex-direction: column;
+          margin-top: 10px;
+
+          display: none;
+
+          &.active {
+            display: block !important;
+          }
+
+          li {
+            margin-top: 25px;
+          }
+        }
+      }
+
+      .cart {
+        margin-top: 20px;
+        align-items: unset;
+      }
+
+      .hamburger {
+        display: block !important;
+        width: 40px;
+        height: 40px;
+        margin-top: 15px;
+        float: right;
+        cursor: pointer;
+        text-align: center;
+        font-size: 30px;
+        color: #c2f1db;
+      }
+      .hamburger::before {
+        content: "\f0c9";
+        font-family: fontAwesome;
+        line-height: 40px;
+      }
+      .hamburger.active::before {
+        content: "\f00d";
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  nav {
+    .nav-area {
+      padding: 0 10px 0 20px;
+    }
+  }
+}
