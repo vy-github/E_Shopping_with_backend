@@ -1,20 +1,7 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import Cart from "./Cart";
+import Cart from "../Cart/Cart";
 import "./Navbar.scss";
-
-function useWindowSize() {
-  const [size, setSize] = useState(window.innerWidth);
-  useLayoutEffect(() => {
-    function updateSize() {
-      setSize(window.innerWidth);
-    }
-    window.addEventListener("resize", updateSize);
-    updateSize();
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
-  return size;
-}
 
 const Navbar = () => {
   let location = useLocation();
@@ -22,8 +9,8 @@ const Navbar = () => {
   const [toggleHamburger, setToggleHamburger] = useState(false);
 
   return (
-    <nav>
-      <div className={`nav-area${toggleHamburger ? " active" : ""}`}>
+    <nav className={toggleHamburger ? "active" : ""}>
+      <div className="nav-area">
         <div className="menus">
           <Link to="/" className={location.pathname === "/" ? "active" : ""}>
             <h2>Shopping</h2>
@@ -36,7 +23,7 @@ const Navbar = () => {
                   to="/men"
                   className={location.pathname === "/men" ? "active" : ""}
                 >
-                  Men
+                  MEN
                 </Link>
               </li>
               <li>
@@ -44,7 +31,7 @@ const Navbar = () => {
                   to="/women"
                   className={location.pathname === "/women" ? "active" : ""}
                 >
-                  Women
+                  WOMEN
                 </Link>
               </li>
               <li>
@@ -52,9 +39,16 @@ const Navbar = () => {
                   to="/kids"
                   className={location.pathname === "/kids" ? "active" : ""}
                 >
-                  Kids
+                  KIDS
                 </Link>
               </li>
+
+              <Link
+                to="/login-signup"
+                className="login-entry login-entry-in-menu"
+              >
+                LOGIN/SIGNUP
+              </Link>
             </ul>
           </div>
         </div>

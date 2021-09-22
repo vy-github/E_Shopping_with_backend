@@ -4,6 +4,7 @@ nav {
   height: 70px;
   background-color: #555a60;
   color: #c2f1db;
+  transition: 0.1s;
 
   .nav-area {
     height: 70px;
@@ -15,10 +16,9 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    transition: 0.3s;
 
     .menus {
-      width: 40%;
+      width: 50%;
       display: flex;
       justify-content: space-between;
 
@@ -29,6 +29,7 @@ nav {
         h2 {
           font-family: "Balsamiq Sans", cursive;
           font-weight: 700;
+          font-size: 28px;
         }
       }
 
@@ -47,6 +48,7 @@ nav {
 
             &.active {
               color: #a0c9b5;
+              text-decoration: underline;
             }
           }
         }
@@ -55,7 +57,6 @@ nav {
 
     .cart {
       position: relative;
-      margin-right: 30px;
       cursor: pointer;
 
       display: flex;
@@ -80,21 +81,38 @@ nav {
       }
     }
 
+    .login-entry-in-menu {
+      display: none;
+    }
+
+    .login-entry {
+      margin-left: 30px;
+      padding: 10px 15px;
+      color: #c2f1db;
+      text-decoration: none;
+      border: 1px solid #8f969e;
+      transition: 0.3s;
+
+      &:hover {
+        border-color: #ff3f6c;
+      }
+    }
+
     .hamburger {
       display: none;
     }
   }
 }
 
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 768px) {
   nav {
+    &.active {
+      height: 270px;
+    }
+
     .nav-area {
       padding: 0 20px 0 50px;
       align-items: unset;
-
-      &.active {
-        height: 200px;
-      }
 
       .menus {
         margin-top: 20px;
@@ -140,6 +158,16 @@ nav {
       }
       .hamburger.active::before {
         content: "\f00d";
+      }
+
+      .login-entry-in-menu {
+        display: block;
+        margin: 25px 15px;
+        width: 140px;
+      }
+
+      .login-entry-in-cart {
+        display: none;
       }
     }
   }
