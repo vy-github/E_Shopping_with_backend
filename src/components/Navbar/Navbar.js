@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
+import ItemContext from "../../context/ItemContext";
 import Cart from "../Cart/Cart";
 import "./Navbar.scss";
 
 const Navbar = () => {
+  const context = useContext(ItemContext);
+  const { nameOfUser, logout } = context;
+
   let location = useLocation();
 
   const [toggleHamburger, setToggleHamburger] = useState(false);
+
+  const [showLogout, setShowLogout] = useState(false);
 
   return (
     <nav className={toggleHamburger ? "active" : ""}>
@@ -43,12 +49,49 @@ const Navbar = () => {
                 </Link>
               </li>
 
-              <Link
-                to="/login-signup"
-                className="login-entry login-entry-in-menu"
-              >
-                LOGIN/SIGNUP
-              </Link>
+              {nameOfUser !== "" && (
+                <li>
+                  <Link
+                    to="/sell"
+                    className={location.pathname === "/kids" ? "active" : ""}
+                  >
+                    SELL
+                  </Link>
+                </li>
+              )}
+
+              {nameOfUser === "" ? (
+                <Link
+                  to="/login-signup"
+                  className="login-entry login-entry-in-menu"
+                >
+                  LOGIN/SIGNUP
+                </Link>
+              ) : (
+                <>
+                  <div
+                    className="name-of-user login-entry-in-menu"
+                    onClick={() => setShowLogout(!showLogout)}
+                  >
+                    {nameOfUser}
+                  </div>
+                  <div
+                    className={`logout logout-menu ${
+                      showLogout ? "logout-active-menu" : ""
+                    }`}
+                    onMouseLeave={() => setShowLogout(false)}
+                  >
+                    <button
+                      onClick={() => {
+                        logout();
+                        setShowLogout(false);
+                      }}
+                    >
+                      Logout
+                    </button>
+                  </div>
+                </>
+              )}
             </ul>
           </div>
         </div>

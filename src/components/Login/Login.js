@@ -1,37 +1,80 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useContext } from "react";
+import ItemContext from "../../context/ItemContext";
 import "./Login.scss";
 
 const Login = () => {
+  const context = useContext(ItemContext);
+  const {
+    signupError,
+    setSignupError,
+    newSignup,
+    loginError,
+    setLoginError,
+    login,
+  } = context;
+
+  const [userData, setUserData] = useState({
+    firstname: "",
+    lastname: "",
+    eid: "",
+    mobile: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const signup = (e) => {
+    e.preventDefault();
+    if (userData.password === userData.confirmPassword) {
+      newSignup(
+        userData.firstname,
+        userData.lastname,
+        userData.eid,
+        userData.mobile,
+        userData.password
+      );
+    } else setSignupError("Password should match");
+  };
+
+  const [loginData, setLoginData] = useState({
+    eid: "",
+    password: "",
+  });
+
+  const checkLogin = (e) => {
+    e.preventDefault();
+    if (loginData.eid !== "" && loginData.password !== "")
+      login(loginData.eid, loginData.password);
+    else setLoginError(true);
+  };
+
   const login_ref = useRef(null);
   const register_ref = useRef(null);
   const btn_ref = useRef(null);
   const container_ref = useRef(null);
 
-  const register = () => {
+  const styleRegister = () => {
     login_ref.current.style.left = "-100%";
     register_ref.current.style.left = "0";
     btn_ref.current.style.left = "110px";
     container_ref.current.style.height = "750px";
   };
 
-  const login = () => {
+  const styleLogin = () => {
     login_ref.current.style.left = "0";
     register_ref.current.style.left = "100%";
     btn_ref.current.style.left = "0";
     container_ref.current.style.height = "440px";
   };
 
-  const signup = () => {};
-
   return (
     <div className="login-container" ref={container_ref}>
       <div className="toggle-container">
         <div className="button-box">
           <div id="btn" ref={btn_ref}></div>
-          <button type="button" className="toggle-btn" onClick={login}>
+          <button type="button" className="toggle-btn" onClick={styleLogin}>
             &nbsp;Log In
           </button>
-          <button type="button" className="toggle-btn" onClick={register}>
+          <button type="button" className="toggle-btn" onClick={styleRegister}>
             &nbsp;Register
           </button>
         </div>
@@ -39,19 +82,41 @@ const Login = () => {
 
       <form action="" className="content login" ref={login_ref}>
         <h1>LOGIN</h1>
-
         <div className="input-con">
-          <input type="text" required />
+          <input
+            type="text"
+            value={loginData.eid}
+            onChange={(e) => {
+              setLoginData((preState) => ({
+                ...preState,
+                eid: e.target.value,
+              }));
+              setLoginError(false);
+            }}
+            required
+          />
           <span>Email id</span>
         </div>
-
         <div className="input-con">
-          <input type="text" required />
+          <input
+            type="text"
+            value={loginData.password}
+            onChange={(e) => {
+              setLoginData((preState) => ({
+                ...preState,
+                password: e.target.value,
+              }));
+              setLoginError(false);
+            }}
+            required
+          />
           <span>Password</span>
         </div>
-
+        <div style={{ height: "10px" }}>
+          {loginError && <p className="errorMsg">Invalid credentials</p>}
+        </div>
         <div className="input-con">
-          <button>Login</button>
+          <button onClick={checkLogin}>Login</button>
         </div>
       </form>
 
@@ -59,33 +124,103 @@ const Login = () => {
         <h1>REGISTER</h1>
 
         <div className="input-con">
-          <input type="text" required />
+          <input
+            type="text"
+            value={userData.firstname}
+            onChange={(e) => {
+              setUserData((preState) => ({
+                ...preState,
+                firstname: e.target.value,
+              }));
+              setSignupError("");
+            }}
+            required
+          />
           <span>First name</span>
         </div>
 
         <div className="input-con">
-          <input type="text" required />
+          <input
+            type="text"
+            value={userData.lastname}
+            onChange={(e) => {
+              setUserData((preState) => ({
+                ...preState,
+                lastname: e.target.value,
+              }));
+              setSignupError("");
+            }}
+            required
+          />
           <span>Last name</span>
         </div>
 
         <div className="input-con">
-          <input type="text" required />
+          <input
+            type="text"
+            value={userData.eid}
+            onChange={(e) => {
+              setUserData((preState) => ({
+                ...preState,
+                eid: e.target.value,
+              }));
+              setSignupError("");
+            }}
+            required
+          />
           <span>Email id</span>
         </div>
 
         <div className="input-con">
-          <input type="text" required />
+          <input
+            type="text"
+            value={userData.mobile}
+            onChange={(e) => {
+              setUserData((preState) => ({
+                ...preState,
+                mobile: e.target.value,
+              }));
+              setSignupError("");
+            }}
+            required
+          />
           <span>Mobile number</span>
         </div>
 
         <div className="input-con">
-          <input type="text" required />
+          <input
+            type="text"
+            value={userData.password}
+            onChange={(e) => {
+              setUserData((preState) => ({
+                ...preState,
+                password: e.target.value,
+              }));
+              setSignupError("");
+            }}
+            required
+          />
           <span>Enter password</span>
         </div>
 
         <div className="input-con">
-          <input type="text" required />
+          <input
+            type="text"
+            value={userData.confirmPassword}
+            onChange={(e) => {
+              setUserData((preState) => ({
+                ...preState,
+                confirmPassword: e.target.value,
+              }));
+              setSignupError("");
+            }}
+            required
+          />
           <span>Confirm password</span>
+        </div>
+
+        <div style={{ height: "10px" }}>
+          {signupError !== "" && <p className="errorMsg">{signupError}</p>}
         </div>
 
         <div className="input-con">

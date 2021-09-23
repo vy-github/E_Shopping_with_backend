@@ -49,6 +49,11 @@
     width: 100%;
     transition: 0.5s;
 
+    .errorMsg {
+      margin-left: 30px;
+      color: red;
+    }
+
     h1 {
       margin: 50px 0 30px;
       color: #225643;
