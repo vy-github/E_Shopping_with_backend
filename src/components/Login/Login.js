@@ -5,11 +5,11 @@ import "./Login.scss";
 const Login = () => {
   const context = useContext(ItemContext);
   const {
-    signupError,
-    setSignupError,
+    errorMsg,
+    setErrorMsg,
     newSignup,
-    loginError,
-    setLoginError,
+    errorCondition,
+    setErrorCondition,
     login,
   } = context;
 
@@ -32,7 +32,7 @@ const Login = () => {
         userData.mobile,
         userData.password
       );
-    } else setSignupError("Password should match");
+    } else setErrorMsg("Password should match");
   };
 
   const [loginData, setLoginData] = useState({
@@ -44,7 +44,7 @@ const Login = () => {
     e.preventDefault();
     if (loginData.eid !== "" && loginData.password !== "")
       login(loginData.eid, loginData.password);
-    else setLoginError(true);
+    else setErrorCondition(true);
   };
 
   const login_ref = useRef(null);
@@ -91,7 +91,7 @@ const Login = () => {
                 ...preState,
                 eid: e.target.value,
               }));
-              setLoginError(false);
+              setErrorCondition(false);
             }}
             required
           />
@@ -106,14 +106,14 @@ const Login = () => {
                 ...preState,
                 password: e.target.value,
               }));
-              setLoginError(false);
+              setErrorCondition(false);
             }}
             required
           />
           <span>Password</span>
         </div>
         <div style={{ height: "10px" }}>
-          {loginError && <p className="errorMsg">Invalid credentials</p>}
+          {errorCondition && <p className="errorMsg">Invalid credentials</p>}
         </div>
         <div className="input-con">
           <button onClick={checkLogin}>Login</button>
@@ -132,7 +132,7 @@ const Login = () => {
                 ...preState,
                 firstname: e.target.value,
               }));
-              setSignupError("");
+              setErrorMsg("");
             }}
             required
           />
@@ -148,7 +148,7 @@ const Login = () => {
                 ...preState,
                 lastname: e.target.value,
               }));
-              setSignupError("");
+              setErrorMsg("");
             }}
             required
           />
@@ -164,7 +164,7 @@ const Login = () => {
                 ...preState,
                 eid: e.target.value,
               }));
-              setSignupError("");
+              setErrorMsg("");
             }}
             required
           />
@@ -180,7 +180,7 @@ const Login = () => {
                 ...preState,
                 mobile: e.target.value,
               }));
-              setSignupError("");
+              setErrorMsg("");
             }}
             required
           />
@@ -196,7 +196,7 @@ const Login = () => {
                 ...preState,
                 password: e.target.value,
               }));
-              setSignupError("");
+              setErrorMsg("");
             }}
             required
           />
@@ -212,7 +212,7 @@ const Login = () => {
                 ...preState,
                 confirmPassword: e.target.value,
               }));
-              setSignupError("");
+              setErrorMsg("");
             }}
             required
           />
@@ -220,7 +220,7 @@ const Login = () => {
         </div>
 
         <div style={{ height: "10px" }}>
-          {signupError !== "" && <p className="errorMsg">{signupError}</p>}
+          {errorMsg !== "" && <p className="errorMsg">{errorMsg}</p>}
         </div>
 
         <div className="input-con">

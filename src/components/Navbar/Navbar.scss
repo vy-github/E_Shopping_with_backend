@@ -129,7 +129,7 @@ nav {
       display: none;
 
       &.logout-menu {
-        top: 182px;
+        top: 225px;
         left: -40px;
       }
 
@@ -169,7 +169,7 @@ nav {
 @media only screen and (max-width: 768px) {
   nav {
     &.active {
-      height: 270px;
+      height: 320px;
     }
 
     .nav-area {

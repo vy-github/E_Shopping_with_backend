@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Home from "./components/Home/Home";
 import ItemState from "./context/ItemState";
 import Login from "./components/Login/Login";
+import AddItem from "./components/Sell/AddItem";
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
           </Route>
           <Route exact path="/login-signup">
             <Login />
+          </Route>
+          <Route exact path="/sell">
+            <AddItem />
           </Route>
         </Switch>
       </ItemState>

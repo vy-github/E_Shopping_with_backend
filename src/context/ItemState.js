@@ -9,8 +9,8 @@ const ItemState = (props) => {
   const itemsInitial = [];
   const [items, setItems] = useState(itemsInitial);
   const [nameOfUser, setNameOfUser] = useState("");
-  const [signupError, setSignupError] = useState("");
-  const [loginError, setLoginError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
+  const [errorCondition, setErrorCondition] = useState(false);
 
   const history = useHistory();
 
@@ -28,6 +28,44 @@ const ItemState = (props) => {
     setItems(json);
   };
 
+  // Add Item
+  const addItem = async (title, description, price, category) => {
+    // TODO: API Call
+    // console.log(image);
+    // image = image.replace(/\\/g, "/");
+    // console.log(image);
+    // console.log({ title, description, price, image });
+
+    const response = await fetch(`${host}/additem`, {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title, description, price, category }),
+    });
+
+    const json = await response.json();
+    if (!json.title) {
+      return setErrorMsg(json.errors[0].msg);
+    }
+
+    // console.log(json);
+
+    // Add item to state
+    setItems((preState) => [{ ...preState, json }]);
+    setErrorCondition(true);
+
+    // logic to add in item
+    // let nameOfUser =
+    //   firstname.slice(0, 1).toUpperCase() + lastname.slice(0, 1).toUpperCase();
+    // setNameOfUser(nameOfUser);
+    // if (nameOfUser !== "") {
+    //   history.push("/");
+    //   setErrorMsg("");
+    // }
+  };
+
   // Registration
   const newSignup = async (firstname, lastname, eid, mobile, password) => {
     // TODO: API Call
@@ -43,17 +81,17 @@ const ItemState = (props) => {
 
     const json = await response.json();
     if (!json.firstname) {
-      setSignupError(json.errors[0].msg);
+      return setErrorMsg(json.errors[0].msg);
     }
     // console.log(json);
 
-    // logic to add in client
+    // logic to add name of user
     let nameOfUser =
       firstname.slice(0, 1).toUpperCase() + lastname.slice(0, 1).toUpperCase();
     setNameOfUser(nameOfUser);
     if (nameOfUser !== "") {
       history.push("/");
-      setSignupError("");
+      setErrorMsg("");
     }
   };
 
@@ -75,7 +113,7 @@ const ItemState = (props) => {
     // console.log(json);
 
     if (json.error === "Please try to login with correct credentials") {
-      setLoginError(true);
+      setErrorCondition(true);
       return;
     }
     let nameOfUser =
@@ -84,7 +122,7 @@ const ItemState = (props) => {
     setNameOfUser(nameOfUser);
     if (nameOfUser !== "") {
       history.push("/");
-      setLoginError(false);
+      setErrorCondition(false);
     }
   };
 
@@ -98,13 +136,14 @@ const ItemState = (props) => {
     <ItemContext.Provider
       value={{
         items,
+        errorMsg,
+        addItem,
         getItems,
         nameOfUser,
-        loginError,
-        setLoginError,
+        errorCondition,
+        setErrorCondition,
         login,
-        signupError,
-        setSignupError,
+        setErrorMsg,
         newSignup,
         logout,
       }}
