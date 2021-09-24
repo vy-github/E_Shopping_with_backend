@@ -5,6 +5,75 @@
 
 .container {
   max-width: 1200px;
-  margin: 50px auto;
-  background-color: violet;
+  margin: 0px auto;
+  margin-top: 50px;
+  // background-color: rgb(226, 223, 226);
+
+  display: flex;
+  flex-wrap: wrap;
+
+  .card {
+    // width: 45%;
+    margin: 30px 20px;
+    padding: 10px;
+    border: 1px solid #8f969e;
+    border-radius: 10px;
+    transition: 0.3s;
+
+    display: flex;
+
+    .image-area {
+      max-width: 150px;
+      max-height: 200px;
+      border: 3px solid #c7a061;
+      border-radius: 3px;
+      margin-right: 15px;
+
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+    }
+
+    .content-area {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .title-desription-area {
+        padding: 0 10px;
+
+        h2 {
+          margin-bottom: 8px;
+        }
+      }
+
+      .bottom-area {
+        padding: 0 10px;
+
+        .button-area {
+          width: 100%;
+          margin: auto;
+          margin-top: 20px;
+
+          button {
+            display: block;
+            color: #18383a;
+            background-color: #76c4aa;
+            padding: 0.5rem 0.8rem;
+            width: 100%;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            border: 1px solid transparent;
+            background: linear-gradient(45deg, #c7beca, #8e9a9b, #c7beca);
+            background-size: 200%;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: 0.3s;
+          }
+        }
+      }
+    }
+  }
 }
