@@ -1,24 +1,27 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import ItemContext from "../../context/ItemContext";
 import Item from "../Item/Item";
 import "./Home.scss";
 
 const Home = () => {
   const context = useContext(ItemContext);
-  const { items, getItems } = context;
-
-  useEffect(() => {
-    getItems();
-    // eslint-disable-next-line
-  }, []);
+  const { items, filterItems } = context;
 
   return (
     <>
       <h1 id="main-heading">All Items</h1>
       <div className="container">
-        {items.map((item) => {
-          return <Item key={item._id} item={item} />;
-        })}
+        {filterItems === "allitem" &&
+          items.map((item) => {
+            return <Item key={item._id} item={item} />;
+          })}
+
+        {filterItems !== "allitem" &&
+          items
+            .filter((item) => item.category === filterItems)
+            .map((filteredTask) => (
+              <Item key={filteredTask._id} item={filteredTask} />
+            ))}
       </div>
     </>
   );

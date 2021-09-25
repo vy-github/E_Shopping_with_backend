@@ -6,7 +6,7 @@ import "./Navbar.scss";
 
 const Navbar = () => {
   const context = useContext(ItemContext);
-  const { nameOfUser, logout } = context;
+  const { setFilterItems, nameOfUser, logout } = context;
 
   let location = useLocation();
 
@@ -18,7 +18,11 @@ const Navbar = () => {
     <nav className={toggleHamburger ? "active" : ""}>
       <div className="nav-area">
         <div className="menus">
-          <Link to="/" className={location.pathname === "/" ? "active" : ""}>
+          <Link
+            to="/"
+            className={location.pathname === "/" ? "active" : ""}
+            onClick={() => setFilterItems("allitem")}
+          >
             <h2>Shopping</h2>
           </Link>
 
@@ -26,24 +30,27 @@ const Navbar = () => {
             <ul className={toggleHamburger ? " active" : ""}>
               <li>
                 <Link
-                  to="/men"
+                  to="/"
                   className={location.pathname === "/men" ? "active" : ""}
+                  onClick={() => setFilterItems("Men")}
                 >
                   MEN
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/women"
+                  to="/"
                   className={location.pathname === "/women" ? "active" : ""}
+                  onClick={() => setFilterItems("Women")}
                 >
                   WOMEN
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/kids"
+                  to="/"
                   className={location.pathname === "/kids" ? "active" : ""}
+                  onClick={() => setFilterItems("Kids")}
                 >
                   KIDS
                 </Link>

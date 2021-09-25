@@ -6,11 +6,15 @@ import React from "react";
 
 const ItemState = (props) => {
   const host = "http://localhost:5000";
-  const itemsInitial = [];
-  const [items, setItems] = useState(itemsInitial);
+
+  const [items, setItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+
   const [nameOfUser, setNameOfUser] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [errorCondition, setErrorCondition] = useState(false);
+
+  const [filterItems, setFilterItems] = useState("allitem");
 
   const history = useHistory();
 
@@ -27,6 +31,8 @@ const ItemState = (props) => {
     const json = await response.json();
     setItems(json);
   };
+
+  getItems();
 
   // Add Item
   const addItem = async (title, description, price, category) => {
@@ -53,7 +59,7 @@ const ItemState = (props) => {
     // console.log(json);
 
     // Add item to state
-    setItems((preState) => [{ ...preState, json }]);
+    setItems((preState) => [...preState, json]);
     setErrorCondition(true);
 
     // logic to add in item
@@ -136,16 +142,19 @@ const ItemState = (props) => {
     <ItemContext.Provider
       value={{
         items,
+        filterItems,
+        setFilterItems,
+        nameOfUser,
         errorMsg,
         addItem,
-        getItems,
-        nameOfUser,
         errorCondition,
         setErrorCondition,
         login,
         setErrorMsg,
         newSignup,
         logout,
+        cartItems,
+        setCartItems,
       }}
     >
       {props.children}

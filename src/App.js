@@ -5,6 +5,7 @@ import Home from "./components/Home/Home";
 import ItemState from "./context/ItemState";
 import Login from "./components/Login/Login";
 import AddItem from "./components/Sell/AddItem";
+import Checkout from "./components/checkout/Checkout";
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
           </Route>
           <Route exact path="/sell">
             <AddItem />
+          </Route>
+          <Route exact path="/checkout">
+            <Checkout />
           </Route>
         </Switch>
       </ItemState>

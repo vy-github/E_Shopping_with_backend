@@ -6,10 +6,11 @@
 .container {
   max-width: 1200px;
   margin: 0px auto;
-  margin-top: 50px;
+  margin-top: 30px;
   // background-color: rgb(226, 223, 226);
 
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
 
   .card {
@@ -53,7 +54,7 @@
         padding: 0 10px;
 
         .button-area {
-          width: 100%;
+          min-width: 146px;
           margin: auto;
           margin-top: 20px;
 
@@ -63,7 +64,7 @@
             background-color: #76c4aa;
             padding: 0.5rem 0.8rem;
             width: 100%;
-            font-size: 1.1rem;
+            font-size: 0.9rem;
             border-radius: 25px;
             border: 1px solid transparent;
             background: linear-gradient(45deg, #c7beca, #8e9a9b, #c7beca);
@@ -71,6 +72,31 @@
             border-radius: 0.25rem;
             cursor: pointer;
             transition: 0.3s;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .container {
+    .card {
+      flex-direction: column;
+
+      .image-area {
+        max-width: 165px;
+        margin-right: 0;
+      }
+
+      .content-area {
+        .title-desription-area {
+          h2 {
+            margin-top: 10px;
+          }
+
+          p {
+            margin-bottom: 20px;
           }
         }
       }
